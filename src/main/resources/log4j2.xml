@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" name="spring-boot-kafka-log" packages="com.cts.onlineShopping">
+    <Appenders>
+         <Kafka name="kafkaLogAppender" topic="log">
+            <PatternLayout pattern="%date %message"/>
+            <Property name="bootstrap.servers">pkc-6ojv2.us-west4.gcp.confluent.cloud:9092</Property>
+            <Property name="sasl.jaas.config">org.apache.kafka.common.security.plain.PlainLoginModule required username='MPWEAE45Y3W62C6X' password='RKCHGxql/pQXItPYFWvaZUQNmzJZ6EJQkokCZxwvbFbFjKf9ykdTgyxbSo0AP4xw';</Property>
+            <Property name="security.protocol">SASL_SSL</Property>
+            <Property name="sasl.mechanism">PLAIN</Property>
+        </Kafka>
+
+
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p [%-7t] %F:%L - %m%n"/>
+        </Console>
+        
+        <RollingFile name="fileLogger"
+			fileName="app.log"
+			filePattern="${basePath}/app-%d{yyyy-MM-dd}.log">
+			<PatternLayout>
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<!-- Max 10 files will be created everyday -->
+			<DefaultRolloverStrategy max="10">
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="stdout"/>
+            <AppenderRef ref="kafkaLogAppender"/>
+            <appender-ref ref="fileLogger" />
+        </Root>
+        <Logger name="org.apache.kafka" level="warn" />
+    </Loggers>
+</Configuration>
