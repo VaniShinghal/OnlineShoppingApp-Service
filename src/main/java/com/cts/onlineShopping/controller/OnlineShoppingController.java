@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cts.onlineShopping.config.ProductProducer;
+//import com.cts.onlineShopping.config.ProductProducer;
 import com.cts.onlineShopping.model.Customer;
 import com.cts.onlineShopping.model.LoginCredentials;
 import com.cts.onlineShopping.model.Product;
@@ -45,8 +45,9 @@ public class OnlineShoppingController {
 	@Autowired
 	OnlineShoppingService service;
 	
-	@Autowired
-	ProductProducer producer;
+	/*
+	 * @Autowired ProductProducer producer;
+	 */
 	
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody Customer customer){
@@ -58,7 +59,7 @@ public class OnlineShoppingController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody LoginCredentials loginCreds){
-		producer.send("log", "new Login: " + loginCreds.toString());
+		//producer.send("log", "new Login: " + loginCreds.toString());
 		System.out.println("Login Started");
 		String token = service.login(loginCreds);
 		if(token.equals("Invalid Credentials") || token.equals("Wrong Password") || token.equals("User Not Found")) {

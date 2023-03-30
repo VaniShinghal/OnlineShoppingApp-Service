@@ -4,7 +4,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
 
-import com.cts.onlineShopping.config.ProductProducer;
+//import com.cts.onlineShopping.config.ProductProducer;
 import com.cts.onlineShopping.model.Product;
 import com.cts.onlineShopping.repo.AdminRepo;
 import com.cts.onlineShopping.repo.CustomerRepo;
@@ -45,9 +45,9 @@ class OnlineShoppingControllerTest {
 	@MockBean
 	private OnlineShoppingService onlineShoppingService;
 
-	@MockBean
-	private ProductProducer productProducer;
-
+	/*
+	 * @MockBean private ProductProducer productProducer;
+	 */
 	/**
 	 * Method under test:
 	 * {@link OnlineShoppingController#addProduct(Product, String)}

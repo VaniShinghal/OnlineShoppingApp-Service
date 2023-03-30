@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
-import com.cts.onlineShopping.config.ProductProducer;
+//import com.cts.onlineShopping.config.ProductProducer;
 import com.cts.onlineShopping.model.Admin;
 import com.cts.onlineShopping.model.Customer;
 import com.cts.onlineShopping.model.LoginCredentials;
@@ -32,8 +32,9 @@ public class OnlineShoppingService {
 	@Autowired
 	ProductRepo productRepo;
 	
-	@Autowired
-	ProductProducer producer;
+	/*
+	 * @Autowired ProductProducer producer;
+	 */
 	
 	@Autowired
 	JwtUtil jwtUtil;
@@ -101,7 +102,7 @@ public class OnlineShoppingService {
 		}
 		if(product!=null) {
 			productRepo.save(product);
-			producer.send("product_activities", "Added Product " + product);
+			//producer.send("product_activities", "Added Product " + product);
 			return "Product Added";
 		}
 		return "Invalid Product";
@@ -116,7 +117,7 @@ public class OnlineShoppingService {
 			Product product = prod.get();
 			product.setProductStatus(status);
 			productRepo.save(product);
-			producer.send("product_activities", "Updated Product " + product);
+			//producer.send("product_activities", "Updated Product " + product);
 			return "Product Updated";
 		}
 		return "Product Not Found";
@@ -127,7 +128,7 @@ public class OnlineShoppingService {
 			return false;
 		}
 		productRepo.deleteById(productName);
-		producer.send("product_activities", "Deleted Product " + productName);
+		//producer.send("product_activities", "Deleted Product " + productName);
 		return true;
 	}
 	
@@ -158,7 +159,7 @@ public class OnlineShoppingService {
 				}
 				
 			}
-			producer.send("product_activities", response + " " + updatedProduct.toString());
+			//producer.send("product_activities", response + " " + updatedProduct.toString());
 		}else {
 			response = "Product Not Found";
 		}
